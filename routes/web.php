@@ -11,17 +11,15 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/tasks', function () {
 	// Laravel's query builder
-	$tasks = DB::table('tasks')->get();
-    return view('welcome', compact('tasks'));
+	$tasks = DB::table('tasks')->latest()->get();
+
+    return view('tasks.index', compact('tasks'));
 });
 
-Route::get('/tasks/{id}', function ($id) {
-	$tasks = DB::table('tasks')->get();
-    return view('welcome', compact('tasks'));
-});
+Route::get('/tasks/{task}', function ($id) {
+	$task = DB::table('tasks')->find($id);
 
-Route::get('/about', function () {
-	return view('about');
+    return view('tasks.show', compact('task'));
 });
