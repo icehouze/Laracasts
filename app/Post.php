@@ -2,12 +2,13 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
 class Post extends Model
 {
-	// to tell laravel which fields are allowed to be mass assigned with create method
-    protected $guarded = [];
-    // or
-    // protected $fillable = ['title', 'body'];
+	// a post can have many comments
+	// if we want to fetch a posts's comments
+	public function comments()
+	{
+		// Eloquent provides this hasMany method
+		return $this->hasMany(Comment::class); // class
+	}
 }
