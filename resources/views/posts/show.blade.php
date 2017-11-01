@@ -1,5 +1,11 @@
 @extends ('layouts.master')
 
 @section('content')
-	<h1>A place to show your post</h1>
+	<div class="blog-post">
+		<h2 class="blog-post-title">A Sample blog post</h2>
+		<p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
+
+		<p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
+
+	</div><!-- /.blog-post -->
 @endsection
