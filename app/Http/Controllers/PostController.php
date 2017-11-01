@@ -24,24 +24,14 @@ class PostController extends Controller
 
 	public function store(Request $request)
 	{
-		// see refactor below for create method
-		// create a new post using request data
-		// $post = new Post;
-		// $post->title = request('title');
-		// $post->body = request('body');
+		// out of the box validation method; pipe separated list - 'title' => 'required|min:10'
+		$this->validate(request(), [
+			'title' => 'required',
+			'body' => 'required'
+		]);
 
-		// save it to the database
-		// $post->save();
-
-		// Post::create([
-		// 	'title' => request('title'),
-		// 	'body' => request('body')
-		// ]);
-
-		// refactored to:
 		Post::create(request(['title', 'body']));
 
-		// redirect somewhere
 		return redirect('/posts');
 	}
 }
