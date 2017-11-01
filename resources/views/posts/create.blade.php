@@ -1,4 +1,7 @@
 @extends ('layouts.master')
+@section ('meta-title')
+	Create a New Blog Post
+@endsection
 
 @section('content')
 

@@ -9,12 +9,17 @@ class PostController extends Controller
 {
 	public function index()
 	{
-		return view('posts.index');
+		// fetch all posts and sort latest ones first
+		$posts = Post::latest()->get();
+
+		// now pass that through to the view
+		return view('posts.index', compact('posts'));
 	}
 
-	public function show()
+	public function show(Post $post)
 	{
-		return view('posts.show');
+		// now pass that through to the view
+		return view('posts.show', compact('post'));
 	}
 
 	public function create()

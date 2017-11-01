@@ -1,11 +1,10 @@
 @extends ('layouts.master')
+@section ('meta-title')
+	{{ $post->title }}
+@endsection
 
 @section('content')
-	<div class="blog-post">
-		<h2 class="blog-post-title">A Sample blog post</h2>
-		<p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
+	<h1>{{ $post->title }}</h1>
 
-		<p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-
-	</div><!-- /.blog-post -->
+	{{ $post->body }}
 @endsection
