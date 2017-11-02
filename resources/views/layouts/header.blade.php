@@ -6,6 +6,13 @@
             <a class="nav-link" href="/posts">Posts</a>
             <a class="nav-link" href="/tasks">Tasks</a>
             <a class="nav-link" href="/users">Users</a>
+            
+            {{-- Check to see if we have a user signed in --}}
+            @if (Auth::check()) 
+              <a class="nav-link ml-auto" href="#">{{ Auth::user()->name }}</a>
+              <a href="/logout" class="nav-link">Sign Out</a>
+            @endif
+            
           </nav>
         </div>
       </div>

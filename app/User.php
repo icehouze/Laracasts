@@ -28,10 +28,22 @@ class User extends Authenticatable
     ];
 
     // a user can have many posts
-    // if we want to fetch a posts's comments
+    // if we want to fetch a user's posts
     public function posts()
     {
         // Eloquent provides this hasMany method
         return $this->hasMany(Post::class); // class
+    }
+
+    public function publish(Post $post) {
+        // and then save existing model data that you have (from PostController)
+        $this->posts()->save($post);
+
+        // because of established relationship, we can use above instead of:
+        // Post::create([
+        //     'title' => request('title'),
+        //     'body' => request('body'), 
+        //     'user_id' => auth()->id()
+        // ]);
     }
 }

@@ -7,6 +7,12 @@ use App\Post;
 
 class PostController extends Controller
 {
+	// lockdown everything but index & show from non-users
+	public function __construct()
+	{
+		$this->middleware('auth')->except(['index', 'show']);
+	}
+
 	public function index()
 	{
 		// fetch all posts and sort latest ones first
@@ -35,7 +41,17 @@ class PostController extends Controller
 			'body' => 'required'
 		]);
 
-		Post::create(request(['title', 'body']));
+		// Post::create([
+		// 	'title' => request('title'),
+		// 	'body' => request('body'), 
+		// 	'user_id' => auth()->id()
+		// ]);
+
+		// or we could do and move above to User.php:
+		// new up a post with request data to pass to publish method
+		auth()->user()->publish(
+			new Post(request(['title', 'body']))
+		);
 
 		return redirect('/posts');
 	}
