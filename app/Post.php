@@ -12,6 +12,15 @@ class Post extends Model
 		return $this->hasMany(Comment::class); // class
 	}
 
+	// $post->user->name;
+	public function user()
+	{
+		// Eloquent provides this belongsTo method		
+		return $this->belongsTo(User::class);
+
+		 // it allows us to do: // $post->user->name;
+	}
+
 	public function addComment($body) // accept the body from the request
 	{
 		//using Eloquent relationship we've established above
@@ -20,11 +29,5 @@ class Post extends Model
 
 		// if we were to say:
 		// $this->comments() it would fetch all comments associated with the post
-
-		// long form
-		// Comment::create([
-		// 	'body' => $body,
-		// 	'post_id' => $this->id
-		// ]);
 	}
 }

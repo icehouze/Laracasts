@@ -26,4 +26,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    // a user can have many posts
+    // if we want to fetch a posts's comments
+    public function posts()
+    {
+        // Eloquent provides this hasMany method
+        return $this->hasMany(Post::class); // class
+    }
 }

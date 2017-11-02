@@ -12,4 +12,13 @@ class Comment extends Model
 		// Eloquent provides this belongsTo method		
 		return $this->belongsTo(Post::class);
 	}
+
+	// $comment->user->name;
+	public function user()
+	{
+		// Eloquent provides this belongsTo method		
+		return $this->belongsTo(User::class);
+
+		 // it allows us to do: // $comment->user->name;
+	}
 }
