@@ -27,7 +27,6 @@ class Post extends Model
 	{
 		//using Eloquent relationship we've established above
 		$this->comments()->create(compact('body'));
-		// $this->comments()->create(['body' => $body]);
 
 		// if we were to say:
 		// $this->comments() it would fetch all comments associated with the post
@@ -38,12 +37,27 @@ class Post extends Model
 	public function scopeFilter($query, $filters) 
 	{
 		// check see if month was passed to the filter and if so, add a where clause
-		if ($month = $filters['month']) {
-			$query->whereMonth('created_at', Carbon::parse($month)->month); 
+		// if (isset) portion is added from comments section of Archives video to handle an empty array when viewing just posts page
+		if (isset($filters['month'])){
+			if($month = $filters['month']) {
+			$query->whereMonth('created_at', Carbon::parse($month)->month);
+			}
 		}
 		// check see if year was passed to the filter and if so, add a where clause
-		if ($year = $filters['year']) {
+		if(isset($filters['year'])){
+			if($year = $filters['year']){
 			$query->whereYear('created_at', $year);
+			}
 		}
+	}
+
+	// static so it is available outside of Post model
+	public static function archives()
+	{
+		return static::selectRaw('year(created_at) year, monthname(created_at) month, count(*) published')
+			->groupBy('year', 'month')
+			->orderByRaw('min(created_at) desc')
+			->get()
+			->toArray();
 	}
 }
