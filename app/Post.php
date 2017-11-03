@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Carbon\Carbon;
+
 class Post extends Model
 {
 	// a post can have many comments
@@ -29,5 +31,19 @@ class Post extends Model
 
 		// if we were to say:
 		// $this->comments() it would fetch all comments associated with the post
+	}
+
+	// Let's set up the query scope to handle the archives request filter (month, year)
+	// accepts the current query and any data you pass through to it (in this case 'month' and 'year' from PostController.php)
+	public function scopeFilter($query, $filters) 
+	{
+		// check see if month was passed to the filter and if so, add a where clause
+		if ($month = $filters['month']) {
+			$query->whereMonth('created_at', Carbon::parse($month)->month); 
+		}
+		// check see if year was passed to the filter and if so, add a where clause
+		if ($year = $filters['year']) {
+			$query->whereYear('created_at', $year);
+		}
 	}
 }

@@ -17,18 +17,26 @@ class PostController extends Controller
 	public function index()
 	{
 		// fetch all posts and sort latest ones first
-		$posts = Post::latest();
+		// $posts = Post::latest();
 
-		// check see if month request exist in url string and filter the query accordingly
-		if ($month = request('month')) {
-			$posts->whereMonth('created_at', Carbon::parse($month)->month); // convert May => 5, October => 10 with Carbon
-		}
-		// check see if year request exist in url string and filter the query accordingly
-		if ($year = request('year')) {
-			$posts->whereYear('created_at', $year);
-		}
+		// // check see if month request exist in url string and filter the query accordingly
+		// if ($month = request('month')) {
+		// 	$posts->whereMonth('created_at', Carbon::parse($month)->month); // convert May => 5, October => 10 with Carbon
+		// }
+		// // check see if year request exist in url string and filter the query accordingly
+		// if ($year = request('year')) {
+		// 	$posts->whereYear('created_at', $year);
+		// }
 
-		$posts = $posts->get();
+		// $posts = $posts->get();
+
+		// Let's refactor what's above
+
+		// we still want to fetch all posts, but we wannt to filter them by the request and let the query scope handle that; 
+		// we are passing 'month' and 'year' to the query scope in Post.php
+		$posts = Post::latest()
+			->filter(request(['month', 'year']))
+			->get();
 
 		// selectRaw is a function that allowes us to use basic SQL queries
 		// groupBy allows us to craete aggregate results of the count(*)
