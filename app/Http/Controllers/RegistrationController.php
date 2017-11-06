@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Mail\Welcome;
 use Illuminate\Http\Request;
 
 class RegistrationController extends Controller
@@ -17,7 +18,7 @@ class RegistrationController extends Controller
 		// validate the form
 		$this->validate(request(), [
 			'name' => 'required',
-			'email' => 'required|email',
+			'email' => 'required|email|unique:users',
 			'password' => 'required|confirmed' // for password_confirmation
 		]);
 
@@ -30,8 +31,9 @@ class RegistrationController extends Controller
 
 		// sign them in
 		auth()->login($user);
-		// or
-		// \Auth::login();
+
+		// send them a welcome email using Mail facade.
+		\Mail::to($user)->send(new Welcome($user)); // pass through $user to the email template
 
 		// redirect to the home page
 		return redirect()->home();
