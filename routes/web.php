@@ -1,5 +1,14 @@
 <?php
 
+App::bind('App\Billing\Stripe', function () {
+	// config('name of the config file.name of the service.key of the credential')
+	return new \App\Billing\Stripe(config('services.stripe.secret'));
+});
+
+$stripe = resolve('App\Billing\Stripe');
+
+dd($stripe);
+
 Route::get('/', function () {
     return view('welcome');
 })->name('home'); // assigns this route as home

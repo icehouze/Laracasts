@@ -15,16 +15,11 @@ class PostController extends Controller
 		$this->middleware('auth')->except(['index', 'show']);
 	}
 
-	public function index(Posts $posts) // for purposes of repository lesson; automatic resolution & dependency injection (passing arguments to a function)
+	public function index() 
 	{
-		// commented out for purposes of Repository Lesson
-		// $posts = Post::latest()
-		// 	->filter(request(['month', 'year']))
-		// 	->get();
-
-		// Repository Lesson
-		$posts = $posts->all();
-
+		$posts = Post::latest()
+			->filter(request(['month', 'year']))
+			->get();
 
 		return view('posts.index', compact('posts'));
 	}
