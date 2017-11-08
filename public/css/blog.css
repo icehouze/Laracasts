@@ -177,3 +177,12 @@ h6,
   margin-bottom: 0;
 }
 
+#flash-message {
+  bottom: 20px;
+  position: absolute;
+  right: 20px;
+  z-index: 10;
+  -webkit-animation: flash-message 4s forwards;
+          animation: flash-message 4s forwards;
+}
+

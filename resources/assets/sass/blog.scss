@@ -170,3 +170,11 @@ h6,
 .blog-footer p:last-child {
   margin-bottom: 0;
 }
+
+#flash-message {
+    bottom: 20px;
+    position: absolute;
+    right: 20px;
+    z-index: 10;
+    animation: flash-message 4s forwards;
+}

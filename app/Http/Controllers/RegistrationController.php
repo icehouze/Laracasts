@@ -14,19 +14,12 @@ class RegistrationController extends Controller
 
 	public function store(RegistrationForm $form)
 	{
-		// validate the form
-		// Moved to Requests/RegistrationForm.php
-
-		// create and save the user
-		// Moved to Requests/RegistrationForm.php
-
-		// sign them in
-		// Moved to Requests/RegistrationForm.php
-
-		// send them a welcome email using Mail facade.
-		// Moved to Requests/RegistrationForm.php
-
+		// Form logic moved to Requests/RegistrationForm.php
 		$form->persist();
+
+		// can apply to any controller where is makes sense to flash a message on redirect
+		// session('key', 'default')
+		session()->flash('message', 'Thanks for much for signing up!');
 
 		// redirect to the home page
 		return redirect()->home();
