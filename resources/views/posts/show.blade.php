@@ -6,7 +6,15 @@
 @section('content')
 	<h1>{{ $post->title }}</h1>
 
+	<p class="blog-post-meta">
+		{{-- Now let's include the author (user) name --}}
+		by {{ $post->user->name }}
+		{{-- Format date using Carbon: http://carbon.nesbot.com/docs/ --}}
+		on {{ $post->created_at->toFormattedDateString() }}
+	</p>
+
 	{{ $post->body }}
+
 	<hr>
 
 	<div class="comments">

@@ -19,7 +19,18 @@ class AppServiceProvider extends ServiceProvider
         // we can hook into when any view is loaded
         // listen for when layouts.sidebar is loaded and then register a callback function where we can bind anything to that view
         view()->composer('layouts.sidebar', function ($view) {
-            $view->with('archives', \App\Post::archives());
+            $archives = \App\Post::archives();
+            // give me just the tags that have posts associated with them
+            $tags = \App\Tag::has('posts')->pluck('name');
+
+            $view->with(compact('archives', 'tags'));
+
+            // refactored above
+            // $view->with('archives', \App\Post::archives());
+            // $view->with('tags', \App\Tag::has('posts')->pluck('name'));
+
+            // give me all of the tags
+            // $view->with('tags', \App\Tag::pluck('name'));
         });
     }
 
