@@ -12,7 +12,12 @@
               <a class="nav-link ml-auto" href="#">{{ Auth::user()->name }}</a>
               <a href="/logout" class="nav-link">Sign Out</a>
             @endif
-            
+
+            @guest
+            <a class="nav-link ml-auto" href="/register">Register</a>
+            <a href="/login" class="nav-link">Sign In</a>
+            @endguest
+
           </nav>
         </div>
       </div>
