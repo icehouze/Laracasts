@@ -10,4 +10,8 @@
             </li>
     	@endforeach
     </ul>
+
+    <div class="sidebar-module">
+		  <a class="btn btn-primary" href="/tasks/create">Add New Task</a>
+  	</div>
 @endsection
