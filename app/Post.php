@@ -26,7 +26,7 @@ class Post extends Model
 	public function addComment($body) // accept the body from the request
 	{
 		//using Eloquent relationship we've established above
-		$this->comments()->create(compact('body'));
+		$this->comments()->create(['body' => $body, 'user_id' => auth()->id()]);
 
 		// if we were to say:
 		// $this->comments() it would fetch all comments associated with the post

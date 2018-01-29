@@ -46,4 +46,15 @@ class User extends Authenticatable
         //     'user_id' => auth()->id()
         // ]);
     }
+
+    public function comments()
+    {
+        // Eloquent provides this hasMany method
+        return $this->hasMany(Comment::class); // class
+    }
+
+    public function commentsOn(Comment $comment) {
+        $this->comments()->save($comment);
+    }
+
 }
