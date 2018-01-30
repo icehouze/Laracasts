@@ -30,7 +30,7 @@
 		</ul>
 	</div>
 
-	@if (Auth::check())
+	@auth
 		<hr>
 		<div class="card">
 			<div class="card-body">
@@ -51,13 +51,14 @@
 
 			</div>
 		</div>
-
-		@else
+	@endauth
+	
+	@guest
 		<div class="card">
 			<div class="card-body">
 				<p>You must be logged in to leave a comment</p>
 			</div>
 		</div>
-	@endif
+	@endguest
 
 @endsection
